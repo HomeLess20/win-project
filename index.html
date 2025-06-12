@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>บ้านเรือนน้อย - เข้าสู่ระบบ</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ฟอนต์ Kanit -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet" />
+
+  <!-- เชื่อม CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="flex items-center justify-center">
+
+  <!-- กล่องเข้าสู่ระบบ -->
+  <div class="login-box">
+    <h1 class="text-2xl font-bold mb-2">เรือนน้อย100ล้าน</h1>
+    <p class="text-sm mb-4 text-white">🔐 กรุณาใส่รหัสผ่านเพื่อเข้าสู่ระบบวินเลข</p>
+
+    <!-- ช่องรหัสผ่าน -->
+    <div class="mb-4">
+      <input
+        id="password"
+        type="text"
+        placeholder="ใส่รหัสผ่าน"
+        class="w-full px-4 py-2 rounded text-black text-center"
+      />
+    </div>
+
+    <!-- ปุ่มเข้าสู่ระบบ -->
+    <button
+      onclick="checkPassword()"
+      class="w-full bg-white text-black font-bold py-2 rounded hover:bg-gray-200 transition"
+    >
+      เข้าสู่ระบบ
+    </button>
+  </div>
+
+  <!-- JavaScript ตรวจรหัสผ่าน -->
+  <script>
+    function checkPassword() {
+      const password = document.getElementById("password").value;
+      if (password === "1234") {
+        window.location.href = "main.html";
+      } else {
+        alert("❌ รหัสผ่านไม่ถูกต้อง");
+      }
+    }
+  </script>
+</body>
+</html>
