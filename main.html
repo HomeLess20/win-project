@@ -66,9 +66,8 @@
     คัดลอก
   </button>
     </div>
-    <div class="bg-white/10 dark:bg-white/5 p-4 rounded shadow text-center text-white">
-    <h3 class="font-bold mb-2">เรทจ่าย</h3>
-    <button onclick="copyImageUrl()" class="copy-btn">คัดลอก</button>
+    <div class="box-left"><h3 class="font-bold mb-2">เรทจ่าย</h3>
+      <button onclick="copyImageUrl(this)" class="copy-btn">คัดลอก</button>
     </div>
 
   </div>
@@ -85,31 +84,6 @@
   </div>
 
   <!-- Logic -->
-<script src="script.js"></script>
-
-<script>
-  function copyImageUrl(button) {
-    const imageUrl = 'assets/messageImage_1748595630732.jpg';
-    const fullUrl = window.location.origin + '/' + imageUrl;
-
-    navigator.clipboard.writeText(fullUrl).then(() => {
-      const original = button.innerText;
-      button.innerText = "คัดลอกแล้ว";
-      button.disabled = true;
-      button.classList.add("animate-pulse");
-
-      setTimeout(() => {
-        button.innerText = original;
-        button.disabled = false;
-        button.classList.remove("animate-pulse");
-      }, 1500);
-    }).catch(() => {
-      alert("❌ คัดลอกล้มเหลว");
-    });
-  }
-</script>
-
-
+  <script src="script.js"></script>
 </body>
 </html>
-
