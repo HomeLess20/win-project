@@ -124,7 +124,7 @@ if (localStorage.getItem('theme') === 'dark') {
 
 // ✅ ใหม่: ฟังก์ชันคัดลอกรูป "เรทจ่าย"
 function copyImage() {
-  const image = document.getElementById('rateImage');
+  const image = document.getElementById('rateImage1');
   const button = event.target;
 
   if (!image.complete) {
