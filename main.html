@@ -4,34 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>เลขวิน - เรือนน้อย100ล้าน</title>
-
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-    }
-  </script>
-
-  <!-- ฟอนต์ Kanit -->
+  <script>tailwind.config = { darkMode: 'class' }</script>
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet" />
-  
-  <!-- สไตล์หลัก -->
   <link rel="stylesheet" href="styles.css" />
-</head>
-<body class="no-bg min-h-screen p-4 flex flex-col md:flex-row gap-6 dark:bg-black dark:text-white" style="font-family: 'Kanit', sans-serif;">
 
-  <!-- ป้องกันเข้าโดยไม่ล็อกอิน -->
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   <script>
-    if (sessionStorage.getItem("auth") !== "ok") {
-      window.location.href = "index.html";
-    }
-  </script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBdGpAzKDIDccSw3wgse_Cq_FffDoAbGCk",
+      authDomain: "win1-fdaff.firebaseapp.com",
+      projectId: "win1-fdaff",
+      storageBucket: "win1-fdaff.appspot.com",
+      messagingSenderId: "130397963528",
+      appId: "1:130397963528:web:9e607be0b7921ab58d18bd"
+    };
+    firebase.initializeApp(firebaseConfig);
 
-  <!-- ปุ่มโหมดกลางคืน -->
-  <div class="fixed top-4 right-4 z-50">
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</head>
+
+<body class="no-bg min-h-screen p-4 flex flex-col md:flex-row gap-6 dark:bg-black dark:text-white">
+
+  <!-- ปุ่มโหมดกลางคืน + ออกจากระบบ -->
+  <div class="fixed top-4 right-4 z-50 flex gap-2">
     <button onclick="toggleDarkMode()" class="bg-gray-800 text-white dark:bg-yellow-400 dark:text-black px-3 py-1 rounded shadow">
       🌙 / ☀️ โหมดกลางคืน
+    </button>
+    <button onclick="firebase.auth().signOut().then(() => window.location.href='index.html')" class="bg-red-500 text-white px-3 py-1 rounded shadow">
+      ออกจากระบบ
     </button>
   </div>
 
@@ -54,22 +62,15 @@
   <!-- กล่องหลัก -->
   <div class="main-container order-1 md:order-2">
     <h2 class="text-3xl font-bold mb-4">เลขวิน</h2>
-    <p class="mb-3 text-gray-200">กรอกเลขไม่เกิน 7 ตัว (ตัวเลขไม่ซ้ำ):</p>
+    <p class="mb-3 text-gray-200">กรอกเลขไม่เกิน 7 ตัว (ไม่ซ้ำ):</p>
     <div class="flex flex-col md:flex-row gap-2 items-center justify-center mb-4">
-      <input
-        id="numbersInput"
-        type="text"
-        maxlength="7"
-        placeholder="เช่น 1234567"
-        class="input-field"
-        oninput="calculateWin()"
-      />
+      <input id="numbersInput" type="text" maxlength="7" placeholder="เช่น 1234567" class="input-field" oninput="calculateWin()" />
     </div>
     <button onclick="resetInput()" class="reset-btn">เริ่มใหม่</button>
     <div id="result" class="grid grid-cols-1 gap-6 mt-6"></div>
   </div>
 
-  <!-- JavaScript -->
+  <!-- Logic -->
   <script src="script.js"></script>
 </body>
 </html>

@@ -3,46 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>บ้านเรือนน้อย - เข้าสู่ระบบ</title>
-
-  <!-- Tailwind CSS -->
+  <title>เข้าสู่ระบบ - เรือนน้อย100ล้าน</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- ฟอนต์ Kanit -->
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet" />
-
-  <!-- เชื่อม CSS -->
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+      background: url('bg1.png/gadiel-lazcano-Qi_e-n0poRM-unsplash.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
 </head>
-<body class="flex items-center justify-center">
+<body class="flex items-center justify-center min-h-screen">
 
-  <!-- กล่องเข้าสู่ระบบ -->
-  <div class="login-box text-center space-y-4">
-    <h1 class="text-2xl font-bold text-white">เรือนน้อย100ล้าน</h1>
-    <p class="text-sm text-white">🔐 กรุณาใส่รหัสผ่านเพื่อเข้าสู่ระบบวินเลข</p>
+  <div class="bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-lg w-full max-w-sm text-center text-white">
+    <h1 class="text-2xl font-bold mb-2">เรือนน้อย100ล้าน</h1>
+    <p class="text-sm mb-6">🔐 กรุณาใส่รหัสผ่านเพื่อเข้าสู่ระบบ</p>
 
-    <!-- ช่องรหัสผ่าน -->
-    <div>
-      <input
-        id="password"
-        type="password"
-        placeholder="ใส่รหัสผ่าน"
-        class="w-full px-4 py-2 rounded text-black text-center"
-      />
-    </div>
-
-    <!-- ปุ่มเข้าสู่ระบบ -->
-    <button
-      onclick="checkPassword()"
-      class="w-full bg-white text-black font-bold py-2 rounded hover:bg-gray-200 transition"
-    >
-      เข้าสู่ระบบ
-    </button>
-
-    <p id="error" class="text-red-300 text-sm mt-2"></p>
+    <input id="password" type="password" placeholder="รหัสผ่าน" class="w-full px-4 py-2 mb-4 rounded text-black text-center" />
+    <button onclick="login()" class="w-full bg-white text-black font-bold py-2 rounded hover:bg-gray-200 transition">เข้าสู่ระบบ</button>
+    <p id="error" class="text-red-300 text-sm mt-3"></p>
   </div>
 
-  <!-- เชื่อม JavaScript -->
-  <script src="auth.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBdGpAzKDIDccSw3wgse_Cq_FffDoAbGCk",
+      authDomain: "win1-fdaff.firebaseapp.com",
+      projectId: "win1-fdaff",
+      storageBucket: "win1-fdaff.appspot.com",
+      messagingSenderId: "130397963528",
+      appId: "1:130397963528:web:9e607be0b7921ab58d18bd"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    function login() {
+      const email = "access@win1.com"; // Email ซ่อนในโค้ด
+      const password = document.getElementById("password").value;
+
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() => {
+          return firebase.auth().signInWithEmailAndPassword(email, password);
+        })
+        .then(() => {
+          window.location.href = "main.html";
+        })
+        .catch((error) => {
+          document.getElementById("error").innerText = "❌ " + error.message;
+        });
+    }
+  </script>
 </body>
 </html>

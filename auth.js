@@ -1,7 +1,7 @@
 function checkPassword() {
   const password = document.getElementById("password").value;
-  const encoded = btoa(password); // เข้ารหัส Base64
-  const correct = "MTIzNA=="; // Base64 ของ "1234"
+  const encoded = btoa(password); 
+  const correct = "MTIzNA=="; 
 
   if (encoded === correct) {
     sessionStorage.setItem("auth", "ok");
