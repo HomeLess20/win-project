@@ -163,6 +163,47 @@ function copyImage() {
     });
   }, 'image/png');
 
-
+    
 
 }
+// ✅ ฟังก์ชันคัดลอกรูปหลายรูป (rateImage + rateImage2)
+function copyImageById(imageId, button) {
+  const image = document.getElementById(imageId);
+
+  if (!image || !image.complete) {
+    alert("⏳ โปรดรอให้รูปโหลดเสร็จ");
+    return;
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = image.naturalWidth;
+  canvas.height = image.naturalHeight;
+
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(image, 0, 0);
+
+  canvas.toBlob(blob => {
+    if (!blob) {
+      alert("❌ ไม่สามารถแปลงรูปได้");
+      return;
+    }
+
+    const item = new ClipboardItem({ [blob.type]: blob });
+    navigator.clipboard.write([item]).then(() => {
+      const original = button.innerText;
+      button.innerText = "คัดลอกสำเร็จ ✅";
+      button.disabled = true;
+      button.classList.add("animate-pulse");
+
+      setTimeout(() => {
+        button.innerText = original;
+        button.disabled = false;
+        button.classList.remove("animate-pulse");
+      }, 1500);
+    }).catch(err => {
+      console.error("❌ Clipboard Error:", err);
+      alert("❌ คัดลอกไม่สำเร็จ โปรดใช้ Chrome และอนุญาต Clipboard");
+    });
+  }, 'image/png');
+}
+

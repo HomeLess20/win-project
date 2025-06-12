@@ -32,7 +32,11 @@
 </head>
 
 <body class="no-bg min-h-screen p-4 flex flex-col md:flex-row gap-6 dark:bg-black dark:text-white">
-<img id="rateImage" src="bg1.png/messageImage_1748595630732.jpg" alt="เรทจ่าย" class="hidden" crossorigin="anonymous" />
+    <!-- รูปซ่อนไว้ใน DOM -->
+    <img id="rateImage1" src="bg1.png/messageImage_1748595630732.jpg" alt="ตาราง 1" class="hidden" crossorigin="anonymous" />
+    <img id="rateImage" src="bg1.png/ตารางวี_0.jpg" class="hidden" crossorigin="anonymous" />
+    <img id="rateImage2" src="bg1.png/ตารางทุกวัน_0.jpg" class="hidden" crossorigin="anonymous" />
+
 
   <!-- ปุ่มโหมดกลางคืน + ออกจากระบบ -->
   <div class="fixed top-4 right-4 z-50 flex gap-2">
@@ -71,6 +75,14 @@
   <h3 class="font-bold mb-2">เรทจ่าย</h3>
   <button onclick="copyImage()" class="copy-btn">คัดลอกรูป</button>
 </div>
+<div class="bg-white/10 dark:bg-white/5 p-4 rounded shadow text-center text-white mt-4">
+  <h3 class="font-bold mb-2">ตาราง</h3>
+  <div class="flex flex-col space-y-2 items-center">
+    <button onclick="copyImageById('rateImage', this)" class="copy-btn w-full">คัดลอกรูป 1</button>
+    <button onclick="copyImageById('rateImage2', this)" class="copy-btn w-full">คัดลอกรูป 2</button>
+  </div>
+</div>
+
 
 
   </div>
