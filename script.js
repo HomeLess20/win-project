@@ -1,45 +1,3 @@
-function toggleDarkMode() {
-  const html = document.documentElement;
-  html.classList.toggle('dark');
-  localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-}
-
-if (localStorage.getItem('theme') === 'dark') {
-  document.documentElement.classList.add('dark');
-}
-
-function copyToClipboard(text, buttonElement) {
-  navigator.clipboard.writeText(text).then(() => {
-    const original = buttonElement.innerText;
-    buttonElement.innerText = "คัดลอกแล้ว";
-    buttonElement.disabled = true;
-    buttonElement.classList.add("animate-pulse");
-    setTimeout(() => {
-      buttonElement.innerText = original;
-      buttonElement.disabled = false;
-      buttonElement.classList.remove("animate-pulse");
-    }, 1500);
-  });
-}
-
-function copyImageUrl(button) {
-  const imageUrl = 'assets/messageImage_1748595630732.jpg';
-  const fullUrl = window.location.origin + '/' + imageUrl;
-  navigator.clipboard.writeText(fullUrl).then(() => {
-    const original = button.innerText;
-    button.innerText = "คัดลอกแล้ว";
-    button.disabled = true;
-    button.classList.add("animate-pulse");
-    setTimeout(() => {
-      button.innerText = original;
-      button.disabled = false;
-      button.classList.remove("animate-pulse");
-    }, 1500);
-  }).catch(() => {
-    alert("❌ คัดลอกล้มเหลว");
-  });
-}
-
 function getCombinations(arr, size) {
   const result = [];
   const combine = (start, prefix) => {
@@ -87,6 +45,7 @@ function renderSet(title, list) {
   const doubles = list.filter(n => isDoubleNumber(n));
   const normals = list.filter(n => !isDoubleNumber(n));
   const finalList = [...normals, ...doubles];
+
   return `
     <div class="flex flex-col items-center space-y-2 mb-2">
       <div class="flex items-center justify-center gap-2">
@@ -137,4 +96,61 @@ function calculateWin() {
 function resetInput() {
   document.getElementById("numbersInput").value = "";
   document.getElementById("result").innerHTML = "";
+}
+
+function copyToClipboard(text, buttonElement) {
+  navigator.clipboard.writeText(text).then(() => {
+    const original = buttonElement.innerText;
+    buttonElement.innerText = "คัดลอกสำเร็จ";
+    buttonElement.disabled = true;
+    buttonElement.classList.add("animate-pulse");
+    setTimeout(() => {
+      buttonElement.innerText = original;
+      buttonElement.disabled = false;
+      buttonElement.classList.remove("animate-pulse");
+    }, 1500);
+  });
+}
+
+function toggleDarkMode() {
+  const html = document.documentElement;
+  html.classList.toggle('dark');
+  localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+}
+
+if (localStorage.getItem('theme') === 'dark') {
+  document.documentElement.classList.add('dark');
+}
+
+// ✅ ใหม่: ฟังก์ชันคัดลอกรูป "เรทจ่าย"
+function copyImage() {
+  const imageUrl = './bg1.png/messageImage_1748595630732.jpg';
+  const button = event.target;
+
+  fetch(imageUrl)
+    .then(response => {
+      if (!response.ok) throw new Error('ไม่พบรูปภาพ');
+      return response.blob();
+    })
+    .then(blob => {
+      const item = new ClipboardItem({ [blob.type]: blob }); // <= ใช้ MIME จาก blob
+      return navigator.clipboard.write([item]);
+    })
+    .then(() => {
+      const original = button.innerText;
+      button.innerText = "คัดลอกสำเร็จ ✅";
+      button.disabled = true;
+      button.classList.add("animate-pulse");
+      setTimeout(() => {
+        button.innerText = original;
+        button.disabled = false;
+        button.classList.remove("animate-pulse");
+      }, 1500);
+    })
+    .catch(err => {
+      console.error("❌ คัดลอกรูปไม่สำเร็จ:", err);
+      alert("❌ คัดลอกรูปไม่สำเร็จ กรุณาใช้ Chrome และตรวจสอบ path รูป");
+    });
+
+
 }
