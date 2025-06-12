@@ -124,33 +124,45 @@ if (localStorage.getItem('theme') === 'dark') {
 
 // ✅ ใหม่: ฟังก์ชันคัดลอกรูป "เรทจ่าย"
 function copyImage() {
-  const imageUrl = './bg1.png/messageImage_1748595630732.jpg';
+  const image = document.getElementById('rateImage');
   const button = event.target;
 
-  fetch(imageUrl)
-    .then(response => {
-      if (!response.ok) throw new Error('ไม่พบรูปภาพ');
-      return response.blob();
-    })
-    .then(blob => {
-      const item = new ClipboardItem({ [blob.type]: blob }); // <= ใช้ MIME จาก blob
-      return navigator.clipboard.write([item]);
-    })
-    .then(() => {
-      const original = button.innerText;
+  if (!image.complete) {
+    alert("⏳ โปรดรอให้รูปโหลดเสร็จก่อนคัดลอก");
+    return;
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = image.naturalWidth;
+  canvas.height = image.naturalHeight;
+
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(image, 0, 0);
+
+  canvas.toBlob(blob => {
+    if (!blob) {
+      alert("❌ ไม่สามารถแปลงรูปเป็น blob ได้");
+      return;
+    }
+
+    const item = new ClipboardItem({ [blob.type]: blob });
+    navigator.clipboard.write([item]).then(() => {
+      const originalText = button.innerText;
       button.innerText = "คัดลอกสำเร็จ ✅";
       button.disabled = true;
       button.classList.add("animate-pulse");
+
       setTimeout(() => {
-        button.innerText = original;
+        button.innerText = originalText;
         button.disabled = false;
         button.classList.remove("animate-pulse");
       }, 1500);
-    })
-    .catch(err => {
-      console.error("❌ คัดลอกรูปไม่สำเร็จ:", err);
-      alert("❌ คัดลอกรูปไม่สำเร็จ กรุณาใช้ Chrome และตรวจสอบ path รูป");
+    }).catch(err => {
+      console.error("❌ Clipboard Error:", err);
+      alert("❌ คัดลอกไม่สำเร็จ โปรดใช้ Chrome และอนุญาต Clipboard");
     });
+  }, 'image/png');
+
 
 
 }
