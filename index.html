@@ -17,15 +17,15 @@
 <body class="flex items-center justify-center">
 
   <!-- กล่องเข้าสู่ระบบ -->
-  <div class="login-box">
-    <h1 class="text-2xl font-bold mb-2">เรือนน้อย100ล้าน</h1>
-    <p class="text-sm mb-4 text-white">🔐 กรุณาใส่รหัสผ่านเพื่อเข้าสู่ระบบวินเลข</p>
+  <div class="login-box text-center space-y-4">
+    <h1 class="text-2xl font-bold text-white">เรือนน้อย100ล้าน</h1>
+    <p class="text-sm text-white">🔐 กรุณาใส่รหัสผ่านเพื่อเข้าสู่ระบบวินเลข</p>
 
     <!-- ช่องรหัสผ่าน -->
-    <div class="mb-4">
+    <div>
       <input
         id="password"
-        type="text"
+        type="password"
         placeholder="ใส่รหัสผ่าน"
         class="w-full px-4 py-2 rounded text-black text-center"
       />
@@ -38,18 +38,11 @@
     >
       เข้าสู่ระบบ
     </button>
+
+    <p id="error" class="text-red-300 text-sm mt-2"></p>
   </div>
 
-  <!-- JavaScript ตรวจรหัสผ่าน -->
-  <script>
-    function checkPassword() {
-      const password = document.getElementById("password").value;
-      if (password === "1234") {
-        window.location.href = "main.html";
-      } else {
-        alert("❌ รหัสผ่านไม่ถูกต้อง");
-      }
-    }
-  </script>
+  <!-- เชื่อม JavaScript -->
+  <script src="auth.js"></script>
 </body>
 </html>

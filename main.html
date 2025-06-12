@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html lang="th" class="transition-all duration-300">
+<html lang="th">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>เลขวิน</title>
+  <title>เลขวิน - เรือนน้อย100ล้าน</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config = { darkMode: 'class' }</script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
 
-  <!-- ฟอนต์ไทย -->
-  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet"/>
-
-  <!-- CSS -->
+  <!-- ฟอนต์ Kanit -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet" />
+  
+  <!-- สไตล์หลัก -->
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="min-h-screen p-4 flex flex-col md:flex-row gap-6 dark:bg-black dark:text-white">
+<body class="no-bg min-h-screen p-4 flex flex-col md:flex-row gap-6 dark:bg-black dark:text-white" style="font-family: 'Kanit', sans-serif;">
+
+  <!-- ป้องกันเข้าโดยไม่ล็อกอิน -->
+  <script>
+    if (sessionStorage.getItem("auth") !== "ok") {
+      window.location.href = "index.html";
+    }
+  </script>
 
   <!-- ปุ่มโหมดกลางคืน -->
   <div class="fixed top-4 right-4 z-50">
@@ -25,17 +36,17 @@
   </div>
 
   <!-- กล่องด้านซ้าย -->
-  <div class="w-full md:w-60 space-y-6 order-2 md:order-1">
-    <div class="bg-white/10 dark:bg-white/5 p-4 rounded shadow text-center">
-      <h3 class="font-bold text-white mb-2">พี่น้อง</h3>
+  <div class="w-full md:w-64 space-y-4 order-2 md:order-1">
+    <div class="bg-white/10 dark:bg-white/5 p-4 rounded shadow text-center text-white">
+      <h3 class="font-bold mb-2">พี่น้อง</h3>
       <button onclick="copyToClipboard('01 12 23 34 45 56 67 78 89 90', this)" class="copy-btn">คัดลอก</button>
     </div>
-    <div class="bg-white/10 dark:bg-white/5 p-4 rounded shadow text-center">
-      <h3 class="font-bold text-white mb-2">เลขเรียง</h3>
+    <div class="bg-white/10 dark:bg-white/5 p-4 rounded shadow text-center text-white">
+      <h3 class="font-bold mb-2">เลขเรียง</h3>
       <button onclick="copyToClipboard('012 123 234 345 456 567 678 789 890 901', this)" class="copy-btn">คัดลอก</button>
     </div>
-    <div class="bg-white/10 dark:bg-white/5 p-4 rounded shadow text-center">
-      <h3 class="font-bold text-white mb-2">ชุดประหาร</h3>
+    <div class="bg-white/10 dark:bg-white/5 p-4 rounded shadow text-center text-white">
+      <h3 class="font-bold mb-2">ชุดประหาร</h3>
       <button onclick="copyToClipboard('010 020 030 040 ...', this)" class="copy-btn">คัดลอก</button>
     </div>
   </div>
@@ -43,9 +54,16 @@
   <!-- กล่องหลัก -->
   <div class="main-container order-1 md:order-2">
     <h2 class="text-3xl font-bold mb-4">เลขวิน</h2>
-    <p class="mb-3 text-gray-200">กรอกตัวเลข (ไม่เกิน 7 ตัวเลขต่อกันโดยไม่เว้นวรรค):</p>
+    <p class="mb-3 text-gray-200">กรอกเลขไม่เกิน 7 ตัว (ตัวเลขไม่ซ้ำ):</p>
     <div class="flex flex-col md:flex-row gap-2 items-center justify-center mb-4">
-      <input id="numbersInput" type="text" maxlength="8" placeholder="เช่น 1234567" class="input-field" oninput="calculateWin()" />
+      <input
+        id="numbersInput"
+        type="text"
+        maxlength="7"
+        placeholder="เช่น 1234567"
+        class="input-field"
+        oninput="calculateWin()"
+      />
     </div>
     <button onclick="resetInput()" class="reset-btn">เริ่มใหม่</button>
     <div id="result" class="grid grid-cols-1 gap-6 mt-6"></div>

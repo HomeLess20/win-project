@@ -47,7 +47,7 @@ function renderSet(title, list) {
   const finalList = [...normals, ...doubles];
 
   return `
-    <div class="flex flex-col items-center space-y-2 mb-10">
+    <div class="flex flex-col items-center space-y-2 mb-2">
       <div class="flex items-center justify-center gap-2">
         <h3 class="text-lg font-semibold">${title} <span class="text-sm text-gray-400">(${finalList.length} ชุด)</span></h3>
         <button onclick="copyToClipboard(\`${finalList.join(' ')}\`, this)" class="copy-btn">คัดลอก</button>

@@ -6,7 +6,7 @@
 }
 
 body {
-  background-image: url('bg1.png');
+  background-image: url('bg1.png/gadiel-lazcano-Qi_e-n0poRM-unsplash.jpg');
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -14,12 +14,22 @@ body {
   padding: 0;
   position: relative;
 }
+
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: -1;
+}
+
+/* ❌ ปิด background สำหรับหน้า main.html */
+.no-bg {
+  background-image: none !important;
+  background-color: #000 !important;
+}
+.no-bg::before {
+  display: none !important;
 }
 
 .main-container {
