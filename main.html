@@ -24,7 +24,7 @@
     </button>
   </div>
 
-  <!-- กล่องด้านซ้าย: พี่น้อง / เลขเรียง -->
+  <!-- กล่องด้านซ้าย -->
   <div class="w-full md:w-60 space-y-6 order-2 md:order-1">
     <div class="bg-white/10 dark:bg-white/5 p-4 rounded shadow text-center">
       <h3 class="font-bold text-white mb-2">พี่น้อง</h3>
@@ -35,19 +35,9 @@
       <button onclick="copyToClipboard('012 123 234 345 456 567 678 789 890 901', this)" class="copy-btn">คัดลอก</button>
     </div>
     <div class="bg-white/10 dark:bg-white/5 p-4 rounded shadow text-center">
-    <h3 class="font-bold text-white mb-2">ชุดประหาร</h3>
-     <button onclick="copyToClipboard(`ชุดหาม
-010 020 030 040 050 060 070 080 090 101 121 131 141 151 161 171 181 191 202 212 232 242 252 262 272 282 292 303 313 323 343 353 363 373 383 393 404 414 424 434 454 464 474 484 494 505 515 525 535 545 565 575 585 595 606 616 626 636 646 656 676 686 696 707 717 727 737 747 757 767 787 797 808 818 828 838 848 858 868 878 898 909 919 929 939 949 959 969 979 989
-
-ชุดเบิ้ล หน้า
-001 002 003 004 005 006 007 008 009 110 112 113 114 115 116 117 118 119 220 221 223 224 225 226 227 228 229 330 331 332 334 335 336 337 338 339 440 441 442 443 445 446 447 448 449 550 551 552 553 554 556 557 558 559 660 661 662 663 664 665 667 668 669 770 771 772 773 774 775 776 778 779 880 881 882 883 884 885 886 887 889 990 991 992 993 994 995 996 997 998
-
-ชุดเบิ้ลหลัง
-100 200 300 400 500 600 700 800 900 011 211 311 411 511 611 711 811 911 022 122 322 422 522 622 722 822 922 033 133 233 433 533 633 733 833 933 044 144 244 344 544 644 744 844 944 055 155 255 355 455 655 755 855 955 066 166 266 366 466 566 766 866 966 077 177 277 377 477 577 677 877 977 088 188 288 388 488 588 688 788 988 099 199 299 399 499 599 699 799 899`, this)" class="copy-btn">
-    คัดลอก
-  </button>
-</div>
-
+      <h3 class="font-bold text-white mb-2">ชุดประหาร</h3>
+      <button onclick="copyToClipboard('010 020 030 040 ...', this)" class="copy-btn">คัดลอก</button>
+    </div>
   </div>
 
   <!-- กล่องหลัก -->
@@ -58,7 +48,7 @@
       <input id="numbersInput" type="text" maxlength="8" placeholder="เช่น 1234567" class="input-field" oninput="calculateWin()" />
     </div>
     <button onclick="resetInput()" class="reset-btn">เริ่มใหม่</button>
-    <div id="result" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6"></div>
+    <div id="result" class="grid grid-cols-1 gap-6 mt-6"></div>
   </div>
 
   <!-- JavaScript -->

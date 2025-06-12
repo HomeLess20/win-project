@@ -45,9 +45,10 @@ function renderSet(title, list) {
   const doubles = list.filter(n => isDoubleNumber(n));
   const normals = list.filter(n => !isDoubleNumber(n));
   const finalList = [...normals, ...doubles];
+
   return `
-    <div>
-      <div class="flex items-center justify-center gap-2 mb-2">
+    <div class="flex flex-col items-center space-y-2 mb-10">
+      <div class="flex items-center justify-center gap-2">
         <h3 class="text-lg font-semibold">${title} <span class="text-sm text-gray-400">(${finalList.length} ชุด)</span></h3>
         <button onclick="copyToClipboard(\`${finalList.join(' ')}\`, this)" class="copy-btn">คัดลอก</button>
       </div>
@@ -58,7 +59,7 @@ function renderSet(title, list) {
 }
 
 function calculateWin() {
-  const input = document.getElementById("numbersInput").value.replace(/\\D/g, '');
+  const input = document.getElementById("numbersInput").value.replace(/\D/g, '');
   const digits = input.split('');
   const result = document.getElementById("result");
 
@@ -116,6 +117,7 @@ function toggleDarkMode() {
   html.classList.toggle('dark');
   localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
 }
+
 if (localStorage.getItem('theme') === 'dark') {
   document.documentElement.classList.add('dark');
 }
