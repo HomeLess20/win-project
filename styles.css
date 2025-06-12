@@ -1,20 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
 
+/* ================== Reset + Font ================== */
 * {
   box-sizing: border-box;
   font-family: 'Kanit', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
+/* ================== Light Mode (default) ================== */
 body {
   background-image: url('bg1.png/gadiel-lazcano-Qi_e-n0poRM-unsplash.jpg');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   min-height: 100vh;
-  margin: 0;
-  padding: 0;
+  transition: background-color 0.4s ease, background-image 0.4s ease;
   position: relative;
 }
 
+/* ม่านดำบางทับพื้นหลัง */
 body::before {
   content: '';
   position: fixed;
@@ -23,15 +28,34 @@ body::before {
   z-index: -1;
 }
 
-/* ❌ ปิด background สำหรับหน้า main.html */
+/* ================== .no-bg สำหรับ main.html ================== */
 .no-bg {
+  background-image: url('bg1.png/gadiel-lazcano-Qi_e-n0poRM-unsplash.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-color 0.4s ease, background-image 0.4s ease;
+}
+
+.no-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+/* ================== Dark Mode ================== */
+.dark .no-bg {
   background-image: none !important;
   background-color: #000 !important;
 }
-.no-bg::before {
+
+.dark .no-bg::before {
   display: none !important;
 }
 
+/* ================== Main Container ================== */
 .main-container {
   background-color: rgba(255, 255, 255, 0.95);
   padding: 1.5rem;
@@ -41,11 +65,13 @@ body::before {
   width: 100%;
   text-align: center;
 }
+
 .dark .main-container {
   background-color: rgba(31, 41, 55, 0.9);
   color: white;
 }
 
+/* ================== Input Field ================== */
 .input-field {
   flex-grow: 1;
   border: 1px solid #ccc;
@@ -55,12 +81,14 @@ body::before {
   background-color: white;
   color: black;
 }
+
 .dark .input-field {
   background-color: #1f2937;
   color: white;
   border: 1px solid #4b5563;
 }
 
+/* ================== ปุ่ม Reset ================== */
 .reset-btn {
   background-color: #16a34a;
   color: white;
@@ -74,6 +102,7 @@ body::before {
   background-color: #15803d;
 }
 
+/* ================== ปุ่ม Copy ================== */
 .copy-btn {
   background-color: #16a34a;
   color: white;
@@ -87,6 +116,7 @@ body::before {
   background-color: #15803d;
 }
 
+/* ================== Pulse Animation ================== */
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.08); }
